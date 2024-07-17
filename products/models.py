@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Category(models.Model):
 
@@ -59,6 +60,7 @@ class Product(models.Model):
     color_option = models.CharField(max_length=20, choices=COLOR_CHOICES, default='colour')
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title

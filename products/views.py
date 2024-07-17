@@ -12,8 +12,25 @@ def all_products(request):
     artists = None
     publishers = None
     genres = None
+    sort = None
+    direction = None
 
     if request.GET:
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if sortkey == 'title':
+                sortkey = 'lower_title'
+                products = products.annotate(lower_name=Lower('title'))
+            elif sortkey == 'date_added':
+                sortkey = 'date_added'    
+
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            products = products.order_by(sortkey)
+
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
@@ -42,6 +59,8 @@ def all_products(request):
             
             queries = Q(title__icontains=query) | Q(artist__name__icontains=query)
             products = products.filter(queries)
+    
+    current_sorting = f'{sort}_{direction}'
 
     context = {
         'products': products,
@@ -50,6 +69,7 @@ def all_products(request):
         'current_artists': artists,
         'current_publishers': publishers,
         'current_genres': genres,
+        'current_sorting': current_sorting,
     }
 
     return render(request, 'products/products.html', context)
