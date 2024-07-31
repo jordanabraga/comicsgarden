@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <hr>
+            <h2 class="logo-font mb-4">My Wishlist</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {% if wishlist_items %}
+                <div class="wishlist-items table-responsive">
+                    <table class="table table-sm table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in wishlist_items %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'product_detail' item.product.id %}" title="{{ item.product.title }}">
+                                            {{ item.product.title }}
+                                        </a>
+                                    </td>
+                                    <td>${{ item.product.price }}</td>
+                                    <td>
+                                        <a href="{% url 'remove_from_wishlist' item.product.id %}" class="btn btn-danger btn-sm">Remove</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted">Your wishlist is currently empty.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling adjustment
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        // Adjust scroll position if there's a fixed header
+                        const headerOffset = 180; // Height of your fixed header, adjust if necessary
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        $('.btt-link').click(function(e) {
+            window.scrollTo(0, 0);
+        });
+    </script>
+{% endblock %}

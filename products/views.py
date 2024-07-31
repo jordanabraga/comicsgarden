@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 
-from .models import Product, Category, Artist
+from .models import Product, Category, Artist, Genre, Publisher, Wishlist
 from .forms import ProductForm, ArtistForm, PublisherForm, GenreForm
 
 # Create your views here.
@@ -61,15 +61,19 @@ def all_products(request):
 
 def product_detail(request, product_id):
     """ A view to show individual product details """
-
+    
     product = get_object_or_404(Product, pk=product_id)
-
+    in_wishlist = False
+    
+    if request.user.is_authenticated:
+        in_wishlist = Wishlist.objects.filter(user=request.user, product=product).exists()
+    
     context = {
         'product': product,
+        'in_wishlist': in_wishlist,
     }
 
     return render(request, 'products/product_detail.html', context)
-
 
 
 @login_required
@@ -177,3 +181,31 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
+
+
+#Wishlist
+@login_required
+def add_to_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user, product=product)
+    if created:
+        messages.success(request, f"{product.title} has been added to your wishlist.")
+    else:
+        messages.info(request, f"{product.title} is already in your wishlist.")
+    return redirect('product_detail', product_id=product.id)
+
+@login_required
+def remove_from_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist = Wishlist.objects.filter(user=request.user, product=product).first()
+    if wishlist:
+        wishlist.delete()
+        messages.success(request, f"{product.title} has been removed from your wishlist.")
+    else:
+        messages.info(request, f"{product.title} was not in your wishlist.")
+    return redirect('product_detail', product_id=product.id)
+
+@login_required
+def view_wishlist(request):
+    wishlist_items = Wishlist.objects.filter(user=request.user)
+    return render(request, 'products/wishlist.html', {'wishlist_items': wishlist_items})

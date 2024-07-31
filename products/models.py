@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
@@ -69,3 +70,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    added_on = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ('user', 'product')
+        verbose_name = 'Wishlist'
+        verbose_name_plural = 'Wishlists'
+
+    def __str__(self):
+        return f"{self.user.username} - {self.product.title}"
