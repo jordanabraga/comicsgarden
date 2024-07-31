@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay2"></div>
+<div class="container">
+<div class="artist-detail">
+    <h1>{{ artist.name }}</h1>
+    {% if artist.website %}
+    <p><i class="fa-solid fa-square-up-right"></i><a href="{{ artist.website }}" target="_blank"> {{ artist.website }}</a></p>
+    {% endif %}
+    <div class="card p-3 mb-4">
+    <p>{{ artist.description }}</p>
+    </div>
+
+        <h3 class="mb-3">Works by {{ artist.name }}</h3>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4 product-item">
+                <div class="card">
+                    <a href="{% url 'product_detail' product.id %}">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                        {% else %}
+                        <img src="{% static 'images/noimage.png' %}" class="card-img-top" alt="{{ product.title }}">
+                        {% endif %}
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'product_detail' product.id %}">{{ product.title }}</a></h5>
+                        <p class="card-text">{{ product.description|truncatewords:30 }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

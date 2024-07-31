@@ -228,3 +228,14 @@ def remove_from_wishlist(request, product_id):
 def view_wishlist(request):
     wishlist_items = Wishlist.objects.filter(user=request.user)
     return render(request, 'products/wishlist.html', {'wishlist_items': wishlist_items})
+
+def artist_detail(request, artist_id):
+    artist = get_object_or_404(Artist, pk=artist_id)
+    products = Product.objects.filter(artist=artist)
+
+    context = {
+        'artist': artist,
+        'products': products,
+    }
+
+    return render(request, 'products/artist_detail.html', context)

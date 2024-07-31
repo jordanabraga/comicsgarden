@@ -52,7 +52,10 @@
 
                         <!-- Main Details -->
                         <h1 class="display-6 mt-3">{{ product.title }}</h1>
-                        <p class="lead text-muted mb-1">by {{ product.artist }}</p>
+                        <p class="lead text-muted mb-1">
+                            by <a href="{% url 'artist_detail' artist_id=product.artist.id %}" class="text-decoration-none">{{ product.artist.name }}</a>
+                        </p>
+                        
                         {% if product.publisher %}
                         <p class="text-muted small">{{ product.publisher }}</p>
                         {% endif %}   
