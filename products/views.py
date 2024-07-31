@@ -15,6 +15,7 @@ def all_products(request):
     products = Product.objects.all()
     query = None
     categories = None
+    genres = None
     sort = None
     direction = None
 
@@ -24,7 +25,7 @@ def all_products(request):
             sort = sortkey
             if sortkey == 'name':
                 sortkey = 'lower_name'
-                products = products.annotate(lower_name=Lower('name'))
+                products = products.annotate(lower_name=Lower('title'))
             if sortkey == 'category':
                 sortkey = 'category__name'
             if 'direction' in request.GET:
@@ -38,14 +39,19 @@ def all_products(request):
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
 
+        if 'genre' in request.GET:
+            genres = request.GET['genre'].split(',')
+            products = products.filter(genres__name__in=genres)
+            genres = Genre.objects.filter(name__in=genres)
+
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
                 messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('products'))
             
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
-            products = products.filter(queries)
+            queries = Q(title__icontains=query) | Q(description__icontains=query) | Q(artist__name__icontains=query) | Q(genres__name__icontains=query)
+            products = products.filter(queries).distinct()
 
     current_sorting = f'{sort}_{direction}'
 
@@ -53,6 +59,7 @@ def all_products(request):
         'products': products,
         'search_term': query,
         'current_categories': categories,
+        'current_genres': genres,
         'current_sorting': current_sorting,
     }
 
