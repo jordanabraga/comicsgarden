@@ -53,8 +53,9 @@
                         <!-- Main Details -->
                         <h1 class="display-6 mt-3">{{ product.title }}</h1>
                         <p class="lead text-muted mb-1">by {{ product.artist }}</p>
+                        {% if product.publisher %}
                         <p class="text-muted small">{{ product.publisher }}</p>
-        
+                        {% endif %}   
                         <!-- Wishlist Button -->
                         <div class="my-3">
                             {% if user.is_authenticated %}
@@ -78,7 +79,7 @@
                             {% endfor %}
                         </p>
                         {% else %}
-                        <p class="small mt-1 mb-0">None</p>
+                        <p class="small mt-1 mb-0">X</p>
                         {% endif %}
                                                 
                         <!-- Product Description -->
@@ -88,17 +89,21 @@
   <div class="details-board">
     <div class="card-group">
         <!-- Card 1: Pages -->
+        {% if product.pages %}
         <div class="card text-center border-light detail-bg">
             <div class="card-body">
                 <p class="card-text font-weight-bold">{{ product.pages }} pages</p>
             </div>
         </div>
+        {% endif %}
         <!-- Card 2: Cover Type -->
+        {% if product.cover_type %}
         <div class="card text-center border-white detail-bg">
             <div class="card-body">
                 <p class="card-text font-weight-bold">{{ product.cover_type }}</p>
             </div>
         </div>
+        {% endif %}
         <!-- Card 3: Color Option -->
         <div class="card text-center border-white detail-bg">
             <div class="card-body">
@@ -113,8 +118,9 @@
                     <i class="fas fa-star mr-1"></i>{{ product.rating }} / 5
                 </p>
                 {% else %}
-                <p class="card-text font-weight-bold text-muted">No Rating</p>
+                <p class="small mt-1 mb-0">No ratings yet.</p>
                 {% endif %}
+            
             </div>
         </div>
     </div>
@@ -130,8 +136,11 @@
                         <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                             {% csrf_token %}
                             <div class="form-row">
-                                <div class="col-6 mt-3">
-                                    <h2>${{ product.price }}</h2>
+                                <div class="col-4 mt-3">
+                                    <h2 class="text-center p-3 pricetag">
+                                        <span class="font-weight-bold" style="font-size: 2rem;">${{ product.price }}</span>
+                                    </h2>
+                                    
                                     <p><strong>Quantity:</strong></p>
                                     <div class="form-group">
                                         <div class="input-group">
@@ -150,12 +159,15 @@
                                     </div>
                                 </div>
         
-                                <div class="col-12 mt-3">
-                                    <a href="{% url 'products' %}" class="btn btn-outline-secondary rounded-0">
-                                        <i class="fas fa-chevron-left"></i> Keep Shopping
-                                    </a>
-                                    <input type="submit" class="btn btn-dark rounded-0" value="Add to Bag">
+                                <div class="col-12 mt-1">
+                                    <input type="submit" class="btn btn-dark rounded-0 btn-lg" value="Add to Bag">
+    
                                 </div>
+                                <div class="col-12 mt-4">
+                                <a href="{% url 'products' %}" class="btn btn-outline-secondary rounded-0">
+                                    <i class="fas fa-chevron-left"></i> Keep Shopping
+                                </a>
+                            </div>
                                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             </div>
                         </form>

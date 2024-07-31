@@ -110,6 +110,11 @@ input[name='q']::placeholder {
     background-color: #f6f5f5;
 }
 
+.pricetag {
+    color: #f6f5f5;
+    background: #343a40;
+}
+
 /* ------------------------------- bootstrap toasts */
 
 .message-container {
