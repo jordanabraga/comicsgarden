@@ -79,6 +79,12 @@ def add_product(request):
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
+    # Initialize forms
+    product_form = ProductForm()
+    artist_form = ArtistForm()
+    publisher_form = PublisherForm()
+    genre_form = GenreForm()
+
     if request.method == 'POST':
         # Handle Product Form Submission
         if 'add_product' in request.POST:
@@ -89,7 +95,7 @@ def add_product(request):
                 return redirect(reverse('product_detail', args=[product.id]))
             else:
                 messages.error(request, 'Failed to add product. Please ensure the form is valid.')
-
+        
         # Handle Artist Form Submission
         elif 'add_artist' in request.POST:
             artist_form = ArtistForm(request.POST, request.FILES)
@@ -98,7 +104,7 @@ def add_product(request):
                 messages.success(request, 'Successfully added artist!')
                 return redirect(reverse('add_product'))
             else:
-                messages.error(request, 'Failed to add artist. Please ensure the form is valid.')
+                messages.error(request, 'Failed to add artist. An artist with this name already exists.')
 
         # Handle Publisher Form Submission
         elif 'add_publisher' in request.POST:
@@ -108,7 +114,7 @@ def add_product(request):
                 messages.success(request, 'Successfully added publisher!')
                 return redirect(reverse('add_product'))
             else:
-                messages.error(request, 'Failed to add publisher. Please ensure the form is valid.')
+                messages.error(request, 'Failed to add publisher. A publisher with this name already exists.')
 
         # Handle Genre Form Submission
         elif 'add_genre' in request.POST:
@@ -118,14 +124,7 @@ def add_product(request):
                 messages.success(request, 'Successfully added genre!')
                 return redirect(reverse('add_product'))
             else:
-                messages.error(request, 'Failed to add genre. Please ensure the form is valid.')
-
-    else:
-        # Initialize empty forms for GET requests
-        product_form = ProductForm()
-        artist_form = ArtistForm()
-        publisher_form = PublisherForm()
-        genre_form = GenreForm()
+                messages.error(request, 'Failed to add genre. A genre with this name already exists.')
 
     template = 'products/add_product.html'
     context = {

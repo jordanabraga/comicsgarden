@@ -17,14 +17,14 @@ class Category(models.Model):
 
 
 class Publisher(models.Model):
-    name = models.CharField(max_length=254)
+    name = models.CharField(max_length=254, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class Artist(models.Model):
-    name = models.CharField(max_length=254)
+    name = models.CharField(max_length=254, unique=True)
     description = models.TextField(blank=True, default="This is a great artist.")
     website = models.URLField(max_length=1024, null=True, blank=True)
 
@@ -33,7 +33,7 @@ class Artist(models.Model):
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=254)
+    name = models.CharField(max_length=254, unique=True)
 
     def __str__(self):
         return self.name
