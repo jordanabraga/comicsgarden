@@ -40,6 +40,11 @@ class Genre(models.Model):
 
 
 class Product(models.Model):
+    COVER_TYPE_CHOICES = [
+        ('softcover', 'Softcover'),
+        ('hardcover', 'Hardcover'),
+    ]
+    
     COLOR_CHOICES = [
         ('colour', 'Colour'),
         ('black_and_white', 'Black and White'),
@@ -56,7 +61,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     pages = models.IntegerField(null=True, blank=True)
-    cover_type = models.CharField(max_length=50, choices=[('softcover', 'Softcover'), ('hardcover', 'Hardcover')])
+    cover_type = models.CharField(max_length=50, choices=COVER_TYPE_CHOICES, blank=True)
     color_option = models.CharField(max_length=20, choices=COLOR_CHOICES, default='colour')
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
