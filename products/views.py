@@ -188,10 +188,22 @@ def delete_product(request, product_id):
 def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     wishlist, created = Wishlist.objects.get_or_create(user=request.user, product=product)
+    
+    # Generate the URL for the wishlist page
+    wishlist_url = request.build_absolute_uri(reverse('wishlist'))
+    
     if created:
-        messages.success(request, f"{product.title} has been added to your wishlist.")
+        messages.success(
+            request, 
+            f"{product.title} has been added to your wishlist. "
+            f"<a href='{wishlist_url}'>View Wishlist</a>."
+        )
     else:
-        messages.info(request, f"{product.title} is already in your wishlist.")
+        messages.info(
+            request, 
+            f"{product.title} is already in your wishlist."
+        )
+    
     return redirect('product_detail', product_id=product.id)
 
 @login_required
