@@ -1,13 +1,50 @@
 from django import forms
 from .widgets import CustomClearableFileInput
-from .models import Product, Category
+from .models import Product, Category, Artist, Publisher, Genre
 
+class ArtistForm(forms.ModelForm):
+    
+    class Meta:
+        model = Artist
+        fields = ['name', 'description', 'website']
+
+class PublisherForm(forms.ModelForm):
+    class Meta:
+        model = Publisher
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Publisher Name'})
+        }
+
+class GenreForm(forms.ModelForm):
+    class Meta:
+        model = Genre
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Genre Name'})
+        }
 
 class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = [
+            'category',
+            'title',
+            'artist',
+            'publisher',
+            'genres',
+            'pages',
+            'description',
+            'price',
+            'sku',
+            'cover_type',
+            'color_option',
+            'image_url',
+            'image',
+            'rating',
+            'date_added'
+        ]
 
     image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
 

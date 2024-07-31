@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 
-from .models import Product, Category
-from .forms import ProductForm
+from .models import Product, Category, Artist
+from .forms import ProductForm, ArtistForm, PublisherForm, GenreForm
 
 # Create your views here.
 
@@ -71,27 +71,68 @@ def product_detail(request, product_id):
     return render(request, 'products/product_detail.html', context)
 
 
+
 @login_required
 def add_product(request):
-    """ Add a product to the store """
+    """ Add a product, artist, publisher, or genre to the store """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save()
-            messages.success(request, 'Successfully added product!')
-            return redirect(reverse('product_detail', args=[product.id]))
-        else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+        # Handle Product Form Submission
+        if 'add_product' in request.POST:
+            product_form = ProductForm(request.POST, request.FILES)
+            if product_form.is_valid():
+                product = product_form.save()
+                messages.success(request, 'Successfully added product!')
+                return redirect(reverse('product_detail', args=[product.id]))
+            else:
+                messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+
+        # Handle Artist Form Submission
+        elif 'add_artist' in request.POST:
+            artist_form = ArtistForm(request.POST, request.FILES)
+            if artist_form.is_valid():
+                artist_form.save()
+                messages.success(request, 'Successfully added artist!')
+                return redirect(reverse('add_product'))
+            else:
+                messages.error(request, 'Failed to add artist. Please ensure the form is valid.')
+
+        # Handle Publisher Form Submission
+        elif 'add_publisher' in request.POST:
+            publisher_form = PublisherForm(request.POST)
+            if publisher_form.is_valid():
+                publisher_form.save()
+                messages.success(request, 'Successfully added publisher!')
+                return redirect(reverse('add_product'))
+            else:
+                messages.error(request, 'Failed to add publisher. Please ensure the form is valid.')
+
+        # Handle Genre Form Submission
+        elif 'add_genre' in request.POST:
+            genre_form = GenreForm(request.POST)
+            if genre_form.is_valid():
+                genre_form.save()
+                messages.success(request, 'Successfully added genre!')
+                return redirect(reverse('add_product'))
+            else:
+                messages.error(request, 'Failed to add genre. Please ensure the form is valid.')
+
     else:
-        form = ProductForm()
-        
+        # Initialize empty forms for GET requests
+        product_form = ProductForm()
+        artist_form = ArtistForm()
+        publisher_form = PublisherForm()
+        genre_form = GenreForm()
+
     template = 'products/add_product.html'
     context = {
-        'form': form,
+        'product_form': product_form,
+        'artist_form': artist_form,
+        'publisher_form': publisher_form,
+        'genre_form': genre_form,
     }
 
     return render(request, template, context)
