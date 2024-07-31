@@ -10,6 +10,21 @@ body {
     font-family: 'Lato';
 }
 
+/* Set all links to be green */
+a {
+    color: #01854d;
+}
+
+/* Optional: Change link color on hover */
+a:hover, a:visited:hover {
+    color: #f9ca3d;
+}
+
+/* Optional: Change link color for visited links */
+a:visited {
+    color: #04a963;;
+}
+
 /* from Bulma */
 .icon {
     align-items: center;
@@ -115,7 +130,27 @@ input[name='q']::placeholder {
     background: #343a40;
 }
 
+.text-yellow {
+    color: #f8db06;
+}
+
+#text-red {
+    color: #de3939;
+}
+
+.navbar-toggler {
+    border: 3px solid #f8db06; /* Set the border color to match the icon color */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23f8db06' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 /* Artist details*/
+
+.bg-green {
+    background-color:#01854d;
+}
 
 .overlay2 {
 	height: 100%;
@@ -310,6 +345,8 @@ input[name='q']::placeholder {
     border-color: #dc3545;
     border-radius: 0;
 }
+
+
 
 
 /* fixed top navbar only on medium and up */

@@ -63,9 +63,9 @@
                         <div class="my-3">
                             {% if user.is_authenticated %}
                             {% if in_wishlist %}
-                            <a href="{% url 'remove_from_wishlist' product.id %}" class="btn btn-outline-danger rounded-0">Remove from Wishlist</a>
+                            <a href="{% url 'remove_from_wishlist' product.id %}" class="btn btn-outline-danger text-black rounded-0"><i class="fa-regular fa-face-sad-tear"></i> Remove from Wishlist</a>
                             {% else %}
-                            <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-dark rounded-0">Add to Wishlist</a>
+                            <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-dark text-white rounded-0"><i class="fa-regular fa-face-grin-stars"></i>  Add to Wishlist</a>
                             {% endif %}
                             {% else %}
                             <p><a href="{% url 'account_login' %}">Login</a> to manage your wishlist.</p>
