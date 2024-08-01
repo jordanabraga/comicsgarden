@@ -9,3 +9,6 @@ def index(request):
 
 def about_view(request):
     return render(request, 'home/about.html')
+
+def shipping_view(request):
+    return render(request, 'home/shipping.html')
