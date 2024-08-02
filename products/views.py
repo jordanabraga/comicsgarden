@@ -200,7 +200,7 @@ def add_to_wishlist(request, product_id):
     wishlist_url = request.build_absolute_uri(reverse('wishlist'))
     
     if created:
-        messages.success(
+        messages.info(
             request, 
             f"{product.title} has been added to your wishlist. "
             f"<a href='{wishlist_url}'>View Wishlist</a>."
@@ -219,7 +219,9 @@ def remove_from_wishlist(request, product_id):
     wishlist = Wishlist.objects.filter(user=request.user, product=product).first()
     if wishlist:
         wishlist.delete()
-        messages.success(request, f"{product.title} has been removed from your wishlist.")
+        messages.info(
+            request, 
+            f"{product.title} has been removed from your wishlist.")
     else:
         messages.info(request, f"{product.title} was not in your wishlist.")
     return redirect('product_detail', product_id=product.id)
