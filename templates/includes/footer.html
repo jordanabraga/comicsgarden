@@ -1,0 +1,48 @@
+<!-- footer.html -->
+<footer class="bg-dark mt-5 desktop-footer">
+    <div class="row no-gutters">
+        <div class="col-12">
+            <div class="line red"></div>
+            <div class="line blue"></div>
+            <div class="line yellow"></div>
+            <div class="line green"></div>
+        </div>
+    </div>
+    <!-- Colorful divisors -->
+    <div class="row py-3">
+        <div class="col-md-6 text-center text-md-right">
+            <ul class="list-unstyled">
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'shipping' %}" >Shipping & Collection</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'wishlist' %}">My Wishlist</a></li>
+                {% else %}
+                <li><a href="{% url 'account_signup' %}">Create Wishlist</a></li>
+                {% endif %}
+            </ul>
+
+        </div>
+        <div class="col-md-6 text-center text-md-left">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="email" placeholder="Your email" aria-label="Sign Up">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</button>
+            </form>
+            <ul class="list-inline mt-2" id="social">
+                <li class="list-inline-item">
+                    <a href="https://facebook.com" class="text-yellow"><i class="fab fa-facebook fa-lg"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://twitter.com" class="text-yellow"><i class="fab fa-twitter fa-lg""></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://instagram.com" class="text-yellow"><i class="fab fa-instagram fa-lg""></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <p>&copy; 2024 Comics Garden. All rights reserved.</p>
+        </div>
+    </div>
+</footer>

@@ -10,18 +10,24 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <h1 class="display-4 logo-font text-black">
-                    The new collections are here
-                </h1>
-                <div class="my-5">
-                    <h4>
-                        <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
-                    </h4>
-                </div>
+<div class="container h-100" id="header-mobile">
+    <div class="row h-100">
+        <div class="col-12 col-md-4 my-auto star-title">
+            <h1 class="display-4 logo-font text-green">
+                Your<br>favorite comics <br>are here
+                <span class="star-star1 text-black">✦</span>
+                <span class="star-star2 text-black">✦</span>
+                <span class="star-star3 text-black">✦</span>
+            </h1>
+            <div class="shopButton mt-3">
+                <h4>
+                    <a href="{% url 'products' %}" class="text-uppercase pt-5">Shop Now  <i class="pl-2 fa-solid fa-play fa-sm"></i></a>
+                </h4>
             </div>
         </div>
     </div>
+</div>
+
+
+    
 {% endblock %}
