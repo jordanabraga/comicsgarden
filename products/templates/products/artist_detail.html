@@ -13,15 +13,17 @@
     <div class="overlay2"></div>
     <div class="container">
         <div class="artist-detail">
-            <hr>
-            <h1 class="text-green">{{ artist.name }}</h1>
+            <h1 class="super-title">{{ artist.name }}</h1>
             {% if artist.website %}
                 <p>
                     <i class="fa-solid fa-square-up-right"></i>
                     <a href="{{ artist.website }}" target="_blank">{{ artist.website }}</a>
                 </p>
             {% endif %}
-            <hr>
+            <div class="side red"></div>
+            <div class="side blue"></div>
+            <div class="side yellow"></div>
+            <div class="side green"></div>
             <div class="card p-3 mb-4">
                 <p>{{ artist.description }}</p>
             </div>

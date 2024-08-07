@@ -158,6 +158,84 @@ input[name='q']::placeholder {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23f8db06' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+.super-title {
+    font-size: 9vh;
+    color: #d25656;
+    margin-bottom: 0;
+}
+
+.side {
+    height: 0.6vh;
+    width: 100%;
+}
+
+/* Nav Details */
+
+.grow-text {
+    transition: transform 0.3s ease-in-out; /* Smooth transition for the transform */
+    color: black;
+}
+
+.grow-text:hover {
+    transform: scale(1.2); /* Scales the text to 120% of its original size */
+    color: #f9ca3d;
+}
+
+.announcement-bar {
+    position: relative;
+    width: 100%;
+    background-color: #000000;
+    color: #f9ca3d;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 2.6vh;
+}
+
+.text-wrapper {
+    display: flex;
+    animation: swipe 10s ease-in-out infinite;
+}
+
+.text {
+    padding: 0.3em;
+    text-transform: uppercase;
+    min-width: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center; /* Center the text */
+}
+
+@keyframes swipe {
+    0% {
+        transform: translateX(100%);
+    }
+    3% {
+        transform: translateX(0%);
+    }
+  
+     50% {
+        transform: translateX(0%);
+    }
+  
+      53% {
+        transform: translateX(-100%);
+    }
+  
+      94% {
+        transform: translateX(-100%);
+    }
+  
+      97% {
+        transform: translateX(-200%);
+    }  
+
+      100% {
+        transform: translateX(-200%);
+    }
+
+}
+
+
 /* Header */
 
 .shopButton {

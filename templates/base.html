@@ -68,7 +68,7 @@
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                     <li class="list-inline-item dropdown">
                         <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
+                            <div class="text-center grow-text">
                                 <div><i class="fa-solid fa-face-smile fa-xl"></i></div>
                                 <p class="my-0">My Account</p>
                             </div>
@@ -89,7 +89,7 @@
                     </li>
                     <li class="list-inline-item">
                         <a class="{% if grand_total %}text-black font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
-                            <div class="text-center">
+                            <div class="text-center grow-text">
                                 <div><i class="fa-solid fa-sack-xmark fa-xl"></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
@@ -114,9 +114,12 @@
             </nav>
         </div>
         <div id="delivery-banner" class="row text-center">
-            <div class="col bg-black text-yellow">
-                <h4 class="logo-font my-1"><i class="fa-solid fa-bahai"></i> Free delivery on orders over ${{ free_delivery_threshold }}! <i class="fa-solid fa-bahai"></i></h4>                
-            </div>            
+            <div class="col announcement-bar">
+                <div class="text-wrapper">
+                    <div class="text"><i class="fa-solid fa-bahai mr-1"></i> Free delivery on orders over ${{ free_delivery_threshold }}! <i class="ml-1 fa-solid fa-bahai"></i></div>
+                    <div class="text"><i class="fa-regular fa-face-grin-stars mr-1"></i> Wishlist your favorite books. <i class="ml-1 fa-regular fa-face-grin-stars"></i></div>
+                </div>
+            </div>         
         </div>
     </header>
 
