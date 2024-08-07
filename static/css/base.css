@@ -485,6 +485,14 @@ input[name='q']::placeholder {
         padding-top: 116px;
     }
 
+    .header-index {
+        padding-top: 130px;
+    }
+
+    .title-wrap {
+        text-wrap: wrap;
+    }
+
     body {
         height: calc(100vh - 116px);
     }
@@ -522,10 +530,14 @@ input[name='q']::placeholder {
     
 }
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
 
     #header-mobile {
         margin-top: 9rem;
+    }
+
+    .header-index {
+        padding-top: 100px;
     }
     
 }

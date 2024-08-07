@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col">
             <hr>
-            <h2 class="logo-font mb-4">My Profile</h2>
+            <h2 class="logo-font mb-4 text-green">My Profile</h2>
             <hr>
         </div>
     </div>
@@ -49,7 +49,7 @@
                             <tr>
                                 <td>
                                     <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
-                                        {{ order.order_number|truncatechars:6 }}
+                                        {{ order.order_number|truncatechars:12 }}
                                     </a>
                                 </td>
                                 <td>{{ order.date }}</td>
@@ -57,9 +57,7 @@
                                     <ul class="list-unstyled">
                                         {% for item in order.lineitems.all %}
                                             <li class="small">
-                                                {% if item.product.has_sizes %}
-                                                    Size {{ item.product.size|upper }}
-                                                {% endif %}{{ item.product.name }} x{{ item.quantity }}
+                                                {{ item.product.name }} x{{ item.quantity }}
                                             </li>
                                         {% endfor %}
                                     </ul>
