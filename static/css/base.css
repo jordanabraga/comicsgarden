@@ -222,13 +222,13 @@ input[name='q']::placeholder {
 
 /* Footer */
 
+#mc_embed_signup {
+    width: 333px;
+}
+
 .index-top {
     z-index: 1050;
     background: white;
-}
-
-.desktop-footer {
-
 }
 
 .line {
