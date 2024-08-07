@@ -42,7 +42,7 @@
         <div id="topnav" class="row bg-green pt-lg-2 d-none d-lg-flex">
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                    <h2 class="logo-font text-black my-0"><strong>Comics Garden</strong></h2>
+                    <h2 class="logo-font text-black my-0 pr-1"><img src="{% get_media_prefix %}logo.png" alt="Site Logo" class="logo-image"><strong>Comics Garden</strong></h2>
                 </a>
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
@@ -51,7 +51,7 @@
                         <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
                         <div class="input-group-append">
                             <button class="form-control btn btn-black border border-black rounded-0" type="submit">
-                                <span class="icon">
+                                <span class="icon text-yellow">
                                     <i class="fas fa-search"></i>
                                 </span>
                             </button>
@@ -139,9 +139,8 @@
     {% block content %}
     {% endblock %}
 
-    {% block footer %}
     {% include 'includes/footer.html' %}
-    {% endblock %}
+
 
     {% block postloadjs %}
     <script type="text/javascript">

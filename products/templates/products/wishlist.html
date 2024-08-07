@@ -14,9 +14,12 @@
 <div class="container mt-4">
     <div class="row mb-4">
         <div class="col">
-            <h2 class="logo-font mb-4">My Wishlist</h2>
+            <hr>
+            <h2 class="logo-font mb-4 text-green">My Wishlist</h2>
+            <hr>
         </div>
     </div>
+
     {% if wishlist_items %}
         <div class="list-group">
             {% for item in wishlist_items %}
@@ -85,7 +88,16 @@
             {% endfor %}
         </div>
     {% else %}
-        <p class="text-muted">Your wishlist is currently empty.</p>
+
+    <p class="lead mb-1">Your wishlist is empty.</p>
+    <p class="lead mb-5">Looks like you haven't added any items to your wishlist yet. Start exploring and add your favorite products!</p>
+    
+    <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+        <span class="icon">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="text-uppercase">Keep Shopping</span>
+    </a>
     {% endif %}
 </div>
 {% endblock %}

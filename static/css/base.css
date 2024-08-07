@@ -10,8 +10,9 @@ body {
     font-family: 'Lato';
 }
 
-h1 {
+h1, h2 {
     font-family: "Bangers", system-ui;
+    letter-spacing: 0.2rem;
 }
 
 /* Set all links to be green */
@@ -40,6 +41,8 @@ a:visited {
 
 .logo-font {
     text-transform: uppercase;
+    white-space: nowrap;
+
 }
 
 .main-logo-link {
@@ -191,9 +194,8 @@ input[name='q']::placeholder {
     display: inline-block;
     text-align: center;
     font-size: 36px;
-    color: #333; /* Change color as needed */
+    color: #333;
     padding: 30px;
-    margin-top: 100px;
   }
   
   .star-title .star-star1,
@@ -203,23 +205,31 @@ input[name='q']::placeholder {
   }
   
   .star-title .star-star1 {
-    right: 90px; /* Adjust horizontal spacing */
-    top: -30px; /* Adjust vertical spacing */
+    right: 90px; 
+    top: -30px; 
   }
   
   .star-title .star-star2 {
-    right: 55px; /* Adjust horizontal spacing */
-    top: -1px; /* Adjust vertical spacing */
+    right: 55px; 
+    top: -1px;
     font-size: 45px;
   }
   
   .star-title .star-star3 {
-    left: 40px; /* Adjust horizontal spacing */
-    bottom: -30px; /* Adjust vertical spacing */
+    left: 40px; 
+    bottom: -30px; 
   }
 
 /* Footer */
 
+.index-top {
+    z-index: 1050;
+    background: white;
+}
+
+.desktop-footer {
+
+}
 
 .line {
     height: 20px;
@@ -246,6 +256,9 @@ input[name='q']::placeholder {
     color: #f8db06;
 }
 
+#social a:hover {
+    color: #d25656;
+}
 
 /* Artist details*/
 
@@ -458,7 +471,11 @@ input[name='q']::placeholder {
     }
 
     .header-container {
-        padding-top: 164px;
+        padding-top: 220px;
+    }
+
+    .header-index {
+        padding-top: 180px;
     }
 }
 
