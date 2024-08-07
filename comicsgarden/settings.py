@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-)3p9$wrea3nsha0jx*#n^p@=z**xi2&@#wk(101)vuaf8@@*qu
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-jordanabrag-comicsgarde-r7zvmsv5kn2.ws-eu115.gitpod.io',
-                'comicsgarden.herokuapp.com', 
+                'comics-garden-b0bf8a56b1c5.herokuapp.com', 
 ]
 
 
