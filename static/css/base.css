@@ -615,7 +615,7 @@ input[name='q']::placeholder {
     }
 
     .header-container {
-        padding-top: 170px;
+        padding-top: 140px;
     }
     
 }
@@ -631,7 +631,7 @@ input[name='q']::placeholder {
     }
 
     .header-container {
-        padding-top: 110px;
+        padding-top: 140px;
     }
     
 }

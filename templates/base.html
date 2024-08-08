@@ -113,14 +113,24 @@
                 {% include 'includes/main-nav.html' %}
             </nav>
         </div>
-        <div id="delivery-banner" class="row text-center">
-            <div class="col announcement-bar">
+        <div id="delivery-banner" class="row text-center mx-0">
+            <div class="col-12 announcement-bar px-0">
                 <div class="text-wrapper">
-                    <div class="text"><i class="fa-solid fa-bahai mr-1"></i> Free delivery on orders over ${{ free_delivery_threshold }}! <i class="ml-1 fa-solid fa-bahai"></i></div>
-                    <div class="text"><i class="fa-regular fa-face-grin-stars mr-1"></i> Wishlist your favorite books. <i class="ml-1 fa-regular fa-face-grin-stars"></i></div>
+                    <div class="text d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-bahai mr-1"></i> 
+                        <span>Free delivery on orders over ${{ free_delivery_threshold }}!</span> 
+                        <i class="ml-1 fa-solid fa-bahai"></i>
+                    </div>
+                    <div class="text d-flex justify-content-center align-items-center">
+                        <i class="fa-regular fa-face-grin-stars mr-1"></i> 
+                        <span>Wishlist your favorite books.</span> 
+                        <i class="ml-1 fa-regular fa-face-grin-stars"></i>
+                    </div>
                 </div>
-            </div>         
-        </div>
+            </div>
+        </div>      
+</div>
+
     </header>
 
     {% if messages %}
