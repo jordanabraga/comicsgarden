@@ -1,6 +1,6 @@
 <li class="list-inline-item">
     <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="text-center">
+        <div class="d-flex flex-column align-items-center">
             <div><i class="fas fa-search fa-lg"></i></div>
             <p class="my-0">Search</p>
         </div>
@@ -22,7 +22,7 @@
 </li>
 <li class="list-inline-item dropdown">
     <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="text-center">
+        <div class="d-flex flex-column align-items-center">
             <div><i class="fa-solid fa-face-smile fa-lg"></i></div>
             <p class="my-0">My Account</p>
         </div>
@@ -43,7 +43,7 @@
 </li>
 <li class="list-inline-item">
     <a class="{% if grand_total %}text-black text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none" href="{% url 'view_bag' %}">
-        <div class="text-center">
+        <div class="d-flex flex-column align-items-center">
             <div><i class="fa-solid fa-sack-xmark fa-lg"></i></div>
             <p class="my-0">
                 {% if grand_total %}

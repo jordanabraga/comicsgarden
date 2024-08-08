@@ -607,12 +607,15 @@ input[name='q']::placeholder {
     }
 
     .text-wrapper {
-        display: block; /* Stack text vertically on smaller screens */
-        animation: none; /* Disable animation on smaller screens */
+        animation: none;
     }
 
-    .text {
-        min-width: auto; /* Allow text to wrap on smaller screens */
+    .text:not(:first-child) {
+        display: none; 
+    }
+
+    .header-container {
+        padding-top: 170px;
     }
     
 }
@@ -628,7 +631,7 @@ input[name='q']::placeholder {
     }
 
     .header-container {
-        padding-top: 160px;
+        padding-top: 110px;
     }
     
 }
