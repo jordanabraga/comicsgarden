@@ -2,16 +2,20 @@ from django import forms
 from .widgets import CustomClearableFileInput
 from .models import Product, Category, Artist, Publisher, Genre
 
-class ArtistForm(forms.ModelForm):    
+
+class ArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
         fields = ['name', 'description', 'website']
-    
+
     def clean_name(self):
         name = self.cleaned_data.get('name')
         if Artist.objects.filter(name=name).exists():
-            raise forms.ValidationError("An artist with this name already exists.")
+            raise forms.ValidationError(
+                "An artist with this name already exists."
+            )
         return name
+
 
 class PublisherForm(forms.ModelForm):
     class Meta:
@@ -21,8 +25,11 @@ class PublisherForm(forms.ModelForm):
     def clean_name(self):
         name = self.cleaned_data.get('name')
         if Publisher.objects.filter(name=name).exists():
-            raise forms.ValidationError("A publisher with this name already exists.")
+            raise forms.ValidationError(
+                "A publisher with this name already exists."
+            )
         return name
+
 
 class GenreForm(forms.ModelForm):
     class Meta:
@@ -32,8 +39,11 @@ class GenreForm(forms.ModelForm):
     def clean_name(self):
         name = self.cleaned_data.get('name')
         if Genre.objects.filter(name=name).exists():
-            raise forms.ValidationError("A genre with this name already exists.")
+            raise forms.ValidationError(
+                "A genre with this name already exists."
+            )
         return name
+
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -56,14 +66,18 @@ class ProductForm(forms.ModelForm):
             'date_added'
         ]
 
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
+    image = forms.ImageField(
+        label='Image', required=False, widget=CustomClearableFileInput
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # Retrieve categories and set choices
         categories = Category.objects.all()
-        friendly_names = [(c.id, c.get_friendly_name()) for c in categories]
+        friendly_names = [
+            (c.id, c.get_friendly_name()) for c in categories
+        ]
         self.fields['category'].choices = friendly_names
 
         # Retrieve genres, sort alphabetically, and set queryset

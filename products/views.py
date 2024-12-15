@@ -9,9 +9,9 @@ from .forms import ProductForm, ArtistForm, PublisherForm, GenreForm
 
 # Create your views here.
 
+
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
-
     products = Product.objects.all()
     query = None
     categories = None
@@ -33,7 +33,7 @@ def all_products(request):
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
-            
+
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
@@ -47,10 +47,18 @@ def all_products(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
-                return redirect(reverse('products'))
-            
-            queries = Q(title__icontains=query) | Q(description__icontains=query) | Q(artist__name__icontains=query) | Q(genres__name__icontains=query)
+                messages.error(
+                    request,
+                    "You didn't enter any search criteria!"
+                )
+            return redirect(reverse('products'))
+
+            queries = (
+                Q(title__icontains=query) |
+                Q(description__icontains=query) |
+                Q(artist__name__icontains=query) |
+                Q(genres__name__icontains=query)
+            )
             products = products.filter(queries).distinct()
 
     current_sorting = f'{sort}_{direction}'
@@ -68,13 +76,15 @@ def all_products(request):
 
 def product_detail(request, product_id):
     """ A view to show individual product details """
-    
     product = get_object_or_404(Product, pk=product_id)
     in_wishlist = False
-    
+
     if request.user.is_authenticated:
-        in_wishlist = Wishlist.objects.filter(user=request.user, product=product).exists()
-    
+        in_wishlist = Wishlist.objects.filter(
+            user=request.user,
+            product=product
+        ).exists()
+
     context = {
         'product': product,
         'in_wishlist': in_wishlist,
@@ -105,8 +115,11 @@ def add_product(request):
                 messages.success(request, 'Successfully added product!')
                 return redirect(reverse('product_detail', args=[product.id]))
             else:
-                messages.error(request, 'Failed to add product. Please ensure the form is valid.')
-        
+                messages.error(
+                    request,
+                    'Failed to add product. Please ensure the form is valid.'
+                )
+
         # Handle Artist Form Submission
         elif 'add_artist' in request.POST:
             artist_form = ArtistForm(request.POST, request.FILES)
@@ -115,7 +128,11 @@ def add_product(request):
                 messages.success(request, 'Successfully added artist!')
                 return redirect(reverse('add_product'))
             else:
-                messages.error(request, 'Failed to add artist. An artist with this name already exists.')
+                messages.error(
+                    request,
+                    'Failed to add artist. '
+                    'An artist with this name already exists.'
+                )
 
         # Handle Publisher Form Submission
         elif 'add_publisher' in request.POST:
@@ -125,7 +142,11 @@ def add_product(request):
                 messages.success(request, 'Successfully added publisher!')
                 return redirect(reverse('add_product'))
             else:
-                messages.error(request, 'Failed to add publisher. A publisher with this name already exists.')
+                messages.error(
+                    request,
+                    'Failed to add publisher. '
+                    'A publisher with this name already exists.'
+                )
 
         # Handle Genre Form Submission
         elif 'add_genre' in request.POST:
@@ -135,7 +156,11 @@ def add_product(request):
                 messages.success(request, 'Successfully added genre!')
                 return redirect(reverse('add_product'))
             else:
-                messages.error(request, 'Failed to add genre. A genre with this name already exists.')
+                messages.error(
+                    request,
+                    'Failed to add genre. '
+                    'A genre with this name already exists.'
+                )
 
     template = 'products/add_product.html'
     context = {
@@ -163,10 +188,14 @@ def edit_product(request, product_id):
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+            messages.error(
+                request,
+                'Failed to update product. '
+                'Please ensure the form is valid.'
+            )
     else:
         form = ProductForm(instance=product)
-        messages.info(request, f'You are editing a product.')
+        messages.info(request, 'You are editing a product.')
 
     template = 'products/edit_product.html'
     context = {
@@ -190,46 +219,61 @@ def delete_product(request, product_id):
     return redirect(reverse('products'))
 
 
-#Wishlist
+# Wishlist
 @login_required
 def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    wishlist, created = Wishlist.objects.get_or_create(user=request.user, product=product)
-    
+    wishlist, created = Wishlist.objects.get_or_create(
+        user=request.user,
+        product=product
+    )
+
     # Generate the URL for the wishlist page
     wishlist_url = request.build_absolute_uri(reverse('wishlist'))
-    
+
     if created:
         messages.info(
-            request, 
+            request,
             f"{product.title} has been added to your wishlist. "
             f"<a href='{wishlist_url}'>View Wishlist</a>."
         )
     else:
         messages.info(
-            request, 
+            request,
             f"{product.title} is already in your wishlist."
         )
-    
+
     return redirect('product_detail', product_id=product.id)
+
 
 @login_required
 def remove_from_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    wishlist = Wishlist.objects.filter(user=request.user, product=product).first()
+    wishlist = Wishlist.objects.filter(
+        user=request.user,
+        product=product
+    ).first()
+
     if wishlist:
         wishlist.delete()
         messages.info(
-            request, 
-            f"{product.title} has been removed from your wishlist.")
+            request,
+            f"{product.title} has been removed from your wishlist."
+        )
     else:
         messages.info(request, f"{product.title} was not in your wishlist.")
     return redirect('product_detail', product_id=product.id)
 
+
 @login_required
 def view_wishlist(request):
     wishlist_items = Wishlist.objects.filter(user=request.user)
-    return render(request, 'products/wishlist.html', {'wishlist_items': wishlist_items})
+    return render(
+        request,
+        'products/wishlist.html',
+        {'wishlist_items': wishlist_items}
+    )
+
 
 def artist_detail(request, artist_id):
     artist = get_object_or_404(Artist, pk=artist_id)
