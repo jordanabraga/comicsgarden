@@ -191,51 +191,6 @@ input[name='q']::placeholder {
     font-size: 2.6vh;
 }
 
-.text-wrapper {
-    display: flex;
-    animation: swipe 10s ease-in-out infinite;
-}
-
-.text {
-    padding: 0.3em;
-    text-transform: uppercase;
-    min-width: 100%;
-    box-sizing: border-box;
-    display: inline-block;
-    text-align: center; /* Center the text */
-}
-
-@keyframes swipe {
-    0% {
-        transform: translateX(100%);
-    }
-    3% {
-        transform: translateX(0%);
-    }
-  
-     50% {
-        transform: translateX(0%);
-    }
-  
-      53% {
-        transform: translateX(-100%);
-    }
-  
-      94% {
-        transform: translateX(-100%);
-    }
-  
-      97% {
-        transform: translateX(-200%);
-    }  
-
-      100% {
-        transform: translateX(-200%);
-    }
-
-}
-
-
 /* Header */
 
 .shopButton {
