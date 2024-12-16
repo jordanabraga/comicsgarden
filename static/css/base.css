@@ -294,7 +294,7 @@ input[name='q']::placeholder {
 /* Artist details*/
 
 .bg-green {
-    background-color:#01854d;
+    background-color:#03c976;
 }
 
 .overlay2 {
@@ -303,7 +303,7 @@ input[name='q']::placeholder {
 	top: 0;
 	left: 0;
 	position: fixed;
-	background: #01854d;
+	background: #03c976;
 	z-index: -1;
 }
 
