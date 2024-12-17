@@ -1,200 +1,216 @@
-# LoveBooks 
-"What if books had a lovely comments sections?"
+# Comics Garden
 
-LoveBooks is a website where readers can write comments about books, and read what other people are saying about the book.
+Comics Garden is an ecommerce platform for an indie comic shop, the type of place you not only go to buy new comics, but also to find rare gems and connect with artists. Made with Django, Python, HTML, CSS (Bootsrap) and Javascript. (And also with a picture of my cat.)
 
+The live project can be viewed [here](https://comics-garden-b0bf8a56b1c5.herokuapp.com/)
 
-The live project can be viewed [here](https://lovebooks-be86f5983c9b.herokuapp.com/)
+![screenshot](media/docs/devices.png)
 
-![screenshot](media/docs/LoveBooksresp.png)
+# Table of Contents
+
+1. [ComicsGarden](#comicsgarden)
+   - [Project Goal](#project-goal)
+   - [Design](#design)
+     - [Wireframe](#wireframe)
+     - [Models](#models)
+   - [User Stories](#user-stories)
+   - [Flow](#flow)
+   - [Special Features](#special-features)
+     - [Auto-populate Genre List](#auto-populate-genre-list)
+     - [Artist Page](#artist-page)
+     - [Wishlist](#wishlist)
+     - [Shop Management](#shop-management)
+     - [Edit or Delete Products](#edit-or-delete-products)
+     - [Relevant Book Details](#relevant-book-details)
+   - [Business Model](#business-model)
+     - [Customers](#customers)
+     - [Value](#value)
+     - [Keywords Research](#keywords-research)
+     - [Marketing](#marketing)
+   - [Testing](#testing)
+     - [Responsiveness](#responsiveness)
+     - [Lighthouse + Color Contrast](#lighthouse--color-contrast)
+     - [Code Validation](#code-validation)
+     - [Manual Testing](#manual-testing)
+   - [Bugs](#bugs)
+   - [Programs Used](#programs-used)
+   - [Deployment](#deployment)
+     - [Local Deployment](#local-deployment)
+     - [Heroku](#heroku)
+   - [Credits](#credits)
+   - [Acknowledgements](#acknowledgements)
+
 
 ## Project Goal
 
-**Goal:** Create a website where readers can comment about their favorite things about books they have read, and see what other people are commenting. 
-
-**USER NEEDS** - The problem and the solution
-
-> "Have you ever read a book that you loved so much that you wanted to talk to everyone about it?"
-
-Sometimes when you finish a good book, two things happen: You want to talk about the things you loved, and you want to see what other people are talking about it. The internet is full of reviews and book platforms, but sometimes you just want to see a really casual, personal impression of a book or share with people a detail that you liked. This is where Lovebooks comes. 
-
-It's a simple, positive website for more personal thoughts about the books that you enjoyed. 
-
-**Results:** BookLover is a website with a book catalogue that can be quickly accessed through searching or browsing and can be improved by adding new books. It has a comment section on book pages that allow users to share comments and view other users comments. 
-
-While creating BookLover, I wanted to create a MVP. What was absolutely necessary (and enough) to make it work?
-- Viewing books and comments
-- Adding books and comments
-- Moderating books and comments
-- Do all of that in an easy, intutive way
-
-The result is simple, and yet all features add on each other. The search bar makes browsing books faster, the FAQ and text directs user to how to use the website, the admin panel makes content moderation a relief and the book model allows enough personalization without wasting too much time filling up details. 
-
-Below I explain in detail each feature. 
-
-## Features
-- **Homepage** : 
-
-The homepage is the website landing page and dashboard all at once. It consists in four parts:
-- Nav Bar
-- Header with search bar and site description to introduce user
-- Catalogue of books, with navigation. 
-- Footer
-
-![desktop_homepage](media/docs/full-page.png)
-
-- **Book Page** :
-
-The book page is where users can see a general description of the books and engage in the comment section. The user must be logged in to leave comments, but the comment box is still visible prompting users to log in and leave their comment. Users can also edit or delete their comments. 
-
-![book page](media/docs/bookdetail.png)
-
-- **FAQ**:
-
-I included on the website points to direct the user to the content. There's the description on the home page, and the suggestions on the comment box. The FAQ ties it all together: It's a simple user manual for BookLover, explaining the concept and listing the features with directions on how to use.
-
-![faq](media/docs/faq.png)
-
-
-- **Add Book Page**:
-
-After logged in, users can see on the navbar the option to ADD BOOK. This directs them to a simple form-page where they can put details of the book and submit for approval. 
-
-I decided to only use a few details for the book model (title, author, summary and cover) because the goal is to simply identify and give context to the book, so we can have comments about it. This also facilitates the process of users adding new books and populating organically the catalogue. 
-
-![add_book](media/docs/addbook.png)
-
-- **Other Pages** : 
-The website also has sign in, sign up and log out pages that follow the same form-page format. 
-
-- **Details** : 
-- The nav bar changes if the user has logged in or not. If not, it gives the option to log in and sign up. If logged in, the user will ADD NEW BOOK and logout.
-- There's a message system giving feedback to user actions. For example, if the user types any input not in the database, a message shows up to alert them of that, and directs user to the type of input accepted (title or author name).
-- The comment counter on the comment section changes according to the number of comments to accomodate the setence in the plural or singular. 
-
-![messaging_screenshot](media/docs/search-message.png)
-![counter_person](media/docs/comment-counter-person.png)
-![counter_people](media/docs/comment-counter-people.png)
-
-- **Superuser Admin Panel**: 
-
-I adapted the admin page to better serve the admin needs. A big part of the admin job for LoveBooks is content moderation. This way the superuser can quickly see not approved books and draft books. The admin also has now the action to approve multiple selected books at once. LoveBook should be simple and easy for users and for superusers as well.
-
-![admin](media/docs/booksadmin.png)
-
-- **Superuser Comment Panel**: 
-
-I also adapted the comment page. Now at one glance the admin can look at multiple comments and aprove with one action.
-
-![admin](media/docs/commentsadmin.png)
-
-### Future Features
-- A like system so users can see first the most interesting (liked) comments about a book, and also browse through most liked books to find new things to read.
-- A tag system to books added by users. This would make finding book in a unique way: Users could create a "enemie to lovers" tag and find all books with this type of relationship. This could also lead to "book playlists." Basically all the books with the tag "Books that will make you cry in the showers." 
-- A catalogue view with filters to make the process of browsing books even better.
-
-LoveBooks doesn't need these things to function, but it would be fun.
-
-# User Experience
+For my eCommerce project, I decided to create an online shop for an indie comic store. What interests me about indie stores is their goal of creating spaces to sell items that are not often found elsewhere. When it comes to an indie comic shop, it’s a space that highlights artists and fosters marginalized creativity. My challenge was to reflect this in my project.
 
 ## Design
 
-The design for LoveBooks is a mix of a landing page and a dashboard. I also wanted to make it modern, energetic. So I settled on a mix of dark shades of purple with pink accents (also ties to the love concept). The blue highlights are there to give a more virtual, technologic vibe to the dashboard. 
+My first step was to think about the general design. After experimenting with a few ideas, I settled on a colorful, hippie, 90s nostalgia aesthetic. This style is making a comeback and is being embraced by many brands targeting younger audiences, such as Urban Outfitters and Lucy & Yak. It celebrates the positivity of supporting independent artists while remaining trendy.
 
-### Wireframes
-I wanted simplicity and I wanted to play with shapes, as well visualize the connection between pages. I did a few experiments on paper and I settled on this configuration.
+Green was the main color for the project, connecting with the concept of a "garden" and fostering a sense of community, while bright yellow served as the secondary color.
 
-![Wireframe](media/docs/wireframes.jpeg)
+![elements](media/docs/elements.png)
 
-# Development Process
+I incorporated elements like symbols, stars, and smiley faces throughout the project. To balance the two main colors, I added a rainbow stripe that functions as a standalone design element. This stripe is applied consistently across the project and could extend beyond it as branding elements for items such as packaging, shirts, bracelets, and bookmarks.
 
-## Project planning and documentation 
+**Wireframe**
 
-I started by creating a Developer's Diary on a blank doc. I defined my goal with the project and user stories (it's the text I used for project goals here).
+Throughout the project, I used Photoshop to organize and experiment with elements on the page before coding. The image below is quiet similar to the final result, but I created it first using Photoshop to have an idea of how I wanted to position elements and experiment with symbols, colors and fonts. 
 
-**As a an unlogged user, I must be able to:**
-- View book pages;
-- View comments on book pages; 
-- Search book pages;
-- Register on the website.
+![wireframe](media/docs/mockup.png)
 
-**As a logged user, I must be able to:**
-- Add book pages;
-- Comment on book pages;
-- Delete and edit my comment on book pages;
-- Logout from the website.
+**Models**
 
-**As a superuser, I must be able to:**
-- Add book pages;
-- Approve, edit and delete book pages;
-- Comment on book pages;
-- Approve user's comments;
-- Delete and edit comments on book pages;
-- Change website permissions for a user;
-- Removing users. 
+I used Google Sheets to organize my ideas for models and the information I needed before starting the project.
 
-After this, I added the user stories on a Trello board and used it as reference during development.
+![model](media/docs/model.png)
 
-![trello](media/docs/trello.jpg)
+**User stories**
 
-## Data Model
+As a customer, I must be able to:
 
-I used Google Sheets to plan my models and brainstorm ideas, also to make it clear the type of field used (ManytoOne, OnetoOne, ManytoMany). I wanted to make sure it would have an auto-slug field.
+View products available
+View specific categories
+View book by genres
+Filter prodcts
+Search products
+View individual products details
+View information about artists
+Quickly identify sales
+View information about the shop
+View shipping information
+Easily view the total of my purchase
+See social media links
 
-![model_plan](media/docs/fields.png)
+Register for an account
+Login and logout
+Recover my password
+Receive an email confirmation after registering
+Have a personal user profile
 
-## Manual Testing
+Add books on my wishlist
+View my wishlist
+Delete my wishlist
 
-### Feature Testing
+Easily select the quantity of a product when purchasing it
+View items in my bag to be purchased
+Adjust the quantity of individual items in my bag
+Easily enter my payment information
+Feel my personal and payment information is safe and secure
+View an order confirmation after checkout
+Receive an email after checking out
 
-I tested the project on desktop and mobile, trying all the features and user paths.
+As an admin, I must be able to:
 
-User paths tested:
-- Homepage -> login -> search books/browse books -> comment on books -> edit comment -> delete comment -> logout
-- Homepage -> Sign up -> (same as above)
-- Homepage -> login -> add book
+Add a product
+Add a genre
+Add an artist
+Add a publisher
+Edit/Update a product
+Delete a product
 
-Superuse paths tested:
-- Admin page -> books -> Filter books, approve/delete books -> book detail -> edit book, delete book, change feature image
-- Admin page -> add book 
-- Admin page -> comments -> approve/delete comments -> edit, delete comments
+The board can be viewed on [Trello](https://trello.com/b/0qkopgt5)
 
-I made edits and tested if the superuser could manipulate other users content. The superuser is able to assign a published book as added by different users.
+![trello](media/docs/trello.png)
 
-As for the search box, I tried multiple combinations to make sure it would return results as intended. For example, at first drafted books were showing up on the seach, and I adjusted the code to avoid this.
+## Flow
 
-### Detailed Manual Testing
+Regarding the layout and user flow, I developed an approach I describe as “simple with highlights.” Comics Garden is a shop for a small business, so it should remain straightforward and accessible. At the same time, it includes design details that emphasize its purpose of showcasing alternative artists.
 
-|Page|Feature|Action|Effect|
-|---|---|---|---|
-|Homepage|Site Logo|Click|Redirects to home page from all pages|
-|Homepage|Logged In User Display|Log in as existing user|Username appears in navbar and ADD BOOK|
-|Homepage|Home link|Click|Redirects to home page from all pages|
-|Homepage|FAQ|Click|Redirects to faq page|
-|Homepage|Add book|Click|Redirects to add book page|
-|Homepage|Logout link|Click|Redirects to confirm signout page|
-|Homepage|Confirm logout|Click 'ok'|Redirects to home page|
-|Homepage|Login link|Click|Redirects to Sign In Page|
-|Homepage|Register link|Click|Redirects to Sign Up Page|
-|Homepage|Search bar|Type book name|Finds book|
-|Homepage|Search bar|Type part of a word|Finds books|
-|Homepage|Search bar|Type inexistent word "dsdas"|Shows message|
-|Homepage|Book details|Click|Opens book page|
-|Homepage|Social Media links|Click|All open new page with the correct social media link|
-|FAQ|Text collapse button|Click|All buttons collapse|
-|FAQ|Text links|Click|All direct to the correct page|
-|ADD NEW BOOK|Form text|Type on the fields|All fields work|
-|ADD NEW BOOK|Submit button|Click|Adds book to the database|
-|ADD NEW BOOK|Add book without image|Not upload image|Placeholder image is displayed|
-|BOOK PAGE|Text field|Type on the fields|Field work|
-|BOOK PAGE|Submit button|Click|Adds comment to the database and message appears|
-|BOOK PAGE|Edit button|Click|Edit comment|
-|BOOK PAGE|Delete button|Click|Delete comment|
-|BOOK PAGE|Login link|Click|Redirect to login page|
-|BOOK PAGE|Comment counter text|1 comment|Displays the text person|
-|BOOK PAGE|Comment counter text|2 comment|Displays the text people|
-|ADMIN PAGE|Approve comments action|Select/Click|Aproved all comments selected|
-|ADMIN PAGE|Approve books action|Select/Click|Aproved all books selected|
+![home](media/docs/flow1.png)
+
+From the main page, the customer can browse books (and other products) in multiple ways. The can select "shop now" and go to a book list views, where they can find important details about the books such as title, author, price, category and genre tags. The customer can also use the navigation bar to browse products by category, genre or sale. 
+
+![books](media/docs/flow2.png)
+
+Besides that, from the main page the user can access everything they might need:
+
+- The about page, where they can have more information about the shop.
+- Login and registering. 
+- Shopping bag.
+- On the footer, they can find shipping information and social media links. 
+
+After they logged in, they can also easily access their profile and wishlist. If the user is the admin, they can also access a Shop Management view.
+
+![shop-management](media/docs/flow3.png)
+
+This is what I mean by straightfoward and accessible: Everything that the user needs is one click away from the main page.
+
+## Special Features
+
+Besides building a functional ecommerce platform, I included features made specifically thinking of the needs of indie comic shops users.
+
+**Auto-populate genre list**
+
+After researching indie comic shops, I noticed that their catalogues often include a wide range of book genres, some very specific. A menu with a full list of genres would be difficult to navigate and could create confusion. What’s the solution to this? I designed a menu that auto-populates based on the top 10 genres with the most books. For example, if the comic shop has more horror books, "Horror" will become one of its main genres, making it easily accessible to customers.
+
+This approach ensures the menu remains relevant and requires low maintenance, which is ideal for a small business. This logic could also be applied to genres with bestselling books or those most searched by users. However, for the scope of this project, filtering by the genres with the most books made the most sense.
+
+![genres](media/docs/features1.png)
+
+**Artist page**
+
+I included a specific artist page that includes all their products available, a bio a link to social media. Many independent artists sell their products direct from indie comic shops, this way they can have a direct link to share on social media. It's like their small little shop indie the indie comic shop. At the same time, customers can browse artists that they like and find more of their work easily.
+
+![genres](media/docs/features2.png)
+
+**Wishlist**
+
+Since one of the goals of the shop is finding new books, a Wishlist system is a perfect feature. Users can wishlist books and see their list on a specific page. 
+
+![genres](media/docs/features3.png)
+
+**Shop Management**
+
+A page where the admin can quickly add new products, artists, publishers and genres to their catalogue. 
+
+**Edit or Delete Products**
+
+If the admin needs to edit quickly a product, they can do it directly after clicking "Edit" on a product page. 
+
+![genres](media/docs/features4.png)
+
+**Relevant book details**
+
+While researching websites for indie comic shops, I noticed that they include specific information about books that are relevant for indie shop costumers, such as the number of pages, the type of cover (soft cover or hardcover) or if the comic book is in color or black and white. I also noticed that they often sell other products created by local artists, such as stickers and postcards, and I included these categories. 
+
+![genres](media/docs/features5.png)
+
+## Business model
+
+Comics Garden is a comic shop that operates as a business-to-customer (B2C) retailer, sometimes acting as a bridge between local artists and their customers. It sells products through its comic shop in Dublin and online via an eCommerce platform. Currently, it only offers physical products. Payments are single and final, after which the product is delivered by a mail service.
+
+**Customers**
+Comic readers looking for diverse, independent, and rare comics while supporting local artists.
+
+**Value**
+Comics Garden simplifies the process of buying and discovering comics. The website features a clean design, multiple ways to search and browse books, a wishlist feature to save desired books, genre-based selection, and dedicated artist pages to help customers find more of what they like.
+
+**Keywords research**
+
+comics,
+indie,
+independent,
+graphic novels,
+indie comics,
+artists,
+illustrators,
+irish comic artists,
+local comic shops,
+stickers,
+postcards,
+dublin comic shops,
+
+**Marketing**
+The website includes accessible social media links and a newsletter to enhance communication and digital presence. It is also optimized with SEO, a sitemap, and a robots.txt file.
+
+I created for this project a [facebook page](https://www.facebook.com/profile.php?id=61570941802380)
+
+![facebook](media/docs/facebook.png)
+
+## Testing
 
 ### Responsiveness
 
@@ -202,75 +218,70 @@ While creating the project, I checked each feature and page to make sure it woul
 
 ### Lighthouse + Color Contrast
 
-I also used Lighthouse to check for potential issues and then I used Siege Media color contrast to adjust colors.
+I also used Lighthouse to check for potential issues and then I used Siege Media color contrast to adjust colors. After checking Lighthouse, I included a label to the search button to improve accessibility as recommended, and I also included SEO keywords to the base.html. 
 
-![color_contrast_validator](media/docs/contast-colors.png)
+![color_contrast_validator](media/docs/contrast.png)
+
+![lighthouse](media/docs/lighthouse.png)
 
 ### Code Validation
 
 #### Python code : 
-- All python code is validated by both the Flake8 linter (installed in VSCode) and the external CodeInstitute validator @ https://pep8ci.herokuapp.com/. I used Flake8 to scan general error and then paste the code on CI Python Linter to fix it. I adjusted specifically: admin, urls (both), views, models and settings.
+- All python code is validated by both the Flake8 linter and the external Code Institute validator @ https://pep8ci.herokuapp.com/. I used Flake8 to scan general error and then paste the code on CI Python Linter to fix it. 
 
 #### JavaScript code :
-- The JavaScript code in the project was validated using JSHint. I only use javascript for the edit and delete button for the comments, and the code was provided by Code Institute on the CodeStar project.
+- The JavaScript code in the project was validated using JSHint. The error showed below was fixed. 
 
-![sign in errors](media/docs/javascript-erro.png)
+![jshint](media/docs/jshint.png)
 
 #### HTML Validation :
 - All HTML files in the project were validated using the W3C Narkup Validation Service.
 https://validator.w3.org/
 
-|  PAGE | Document checking completed. No errors or warnings to show. |
-|---|---|
-| home | yes |
-| faq | yes |
-| add book | yes |
-| book detail | yes |
-| login | yes |
-| logout | yes  |
-| sign in | no, but the only errors are on the text of the imported sign in. I can't modify.|
-
-Sign in Errors
-
-![sign in errors](media/docs/html-error.png)
-
-Related to the help text for the password.
-
 #### CSS Validation :
 - I pasted the entired CSS code from file style.css on the W3C Validation Service, and received the result "Congratulations! No Error Found."
 https://jigsaw.w3.org/css-validator/
 
-# Bugs
+## Manual Testing
 
-I didn't run into any major bugs while creating the project. Most of them were due to typos. I still documented everything that caused a problem in the page loading as expected. 
+|Page|Feature|Action|Effect|
+|---|---|---|---|
+|Homepage|Site Logo|Click|Redirects to home page from all pages|
+|Homepage|Logged In User Display|Log in as existing user|Account and Wishlist options appear|
+|Homepage|Home link|Click|Redirects to home page from all pages|
+|Homepage|ABOUT|Click|Redirects to about page|
+|Homepage|Shipping page|Click|Redirects to shipping page|
+|Homepage|Login link|Click|Redirects to Sign In Page|
+|Homepage|Register link|Click|Redirects to Sign Up Page|
+|Homepage|Book details|Click|Opens book page|
+|Homepage|Social Media links|Click|All open new page with the correct social media link|
+|Homepage|Navbar links|Click|Redirects to navbar links|
+|Homepage|Logout link|Click|Redirects to confirm signout page|
+|Homepage|Confirm logout|Click 'ok'|Redirects to home page|
+|Homepage|Search bar|Type book name|Finds book|
+|Homepage|Search bar|Type part of a word|Finds books|
+|Homepage|Search bar|Type inexistent word "dsdas"|Shows message|
+|Book list|Links|Click|All links lead to correct page or sorting|	
+|Book list|Sorting|Select|Page sorts according to selection|
+|Wishlist|Add to wishlist button|Click|Adds to the booklist and displays message|
+|Wishlist|Delete from wishlist button|Click|Deletes from wishlist|
+|Book page|Links|Click|All links lead to correct page or sorting|
+|Book page|Buttons|Click|Increases or descreases the quantity, add to bag or wishlist|		
+|Author page|Links|Click|All links lead to correct page or sorting|
+|Checkout page|Buttons|Click|Concludes the order|
+|Shop Management page|Content|Submit content|Add content to database|
+|Edit book page|Content|Edit content|Edits content on database|
 
-- Problem: The HTTP response page /books wasn't displaying.
-  Fix: Corrected a typo.
-  
-- Problem: Book summary on the main page was showing text with HTML.
-  Fix: Include the safe filter in the index HTML. {{ book.summary|truncatewords:30|safe }}
+## BUGS
 
-- Problem: Now the book summary was disappearing for certain books.
-  Fix: I decided that truncatewords wasn't as necessary, and the full summary view while browsing books was a better user experience.
-
-- Problem: "Edit" comment button wasn't being displayed.
-  Fix: Correct the "comment_edit" function indentation.
-
-- Problem: Deployment to Heroku failed due to "ModuleNotFoundError: No module named 'crispy_forms'".
-  Fix: Change to double quotes the crispy_forms on the installed apps list.
-
-- Problem: Deployment to Heroku didn't display CSS properly.
-  Fix: Run collectstatic again.
-
-- Problem: CSS wasn't being displayed on the server.
-  Fix: Change DEBUG to TRUE.
-
-- Problem: A few posts were displaying a different CSS.
-  Fix: It was the Summernote text box adding HTML and CSS, I removed those. (Note: truncatewords might work now, but I don't want to add it anymore.)
-
-- Problem: Edit and delete buttons stopped working.
-  Fix: I needed to adjust the variables to my new class names.
-
+- When starting the project, the server wasn't running even after adding the url to allowed hosts. Solution: Closed everything and opened again. 
+- When implementing search queries, it was giving an error related to icontains. Solution: I included in the search the artist's name, which is a foreign key. So the correct code is Q(artist__name__icontains=query)
+- When implementing sorting queries, the sorting by specific genres wasn't working. Solution: Change code to case insensitive filter.
+- Font Awesome links stopped working. Solution: Replacing the link in the base.html for a new one.
+- When setting model fields to unique and trying to migrate, it gave an integrityError. Solution: It was due a duplicate item on the database. I used the admin panel to remove it, and tried to migrate again. It worked.
+- When including link to the wishlist on the sucess message, the link would appear as plain text. Solution: Include the safe tag on toasts messages. 
+- Search bar wasn't filtering books. Solution: I had to fix the product view.
+- Card payments started failing and giving TypeError at /checkout/ unsupported operand type(s) for *: 'decimal.Decimal' and 'float'" error. Solution: When I was fixing long lines in python, the code broke. 
 
 # Programs Used
 1. [Gitpod](https://www.gitpod.io/)
@@ -284,79 +295,61 @@ I didn't run into any major bugs while creating the project. Most of them were d
 
 # Deployment
 
-## Setting up a cloudinary account for static storage.
-1. Navigate to www.cloudinary.com, and click the Sign Up for Free button. Create a new account.
-2. Click on Create Account, and click the link in the verification email that you'll be sent.
-3. On the Dashboard, copy the API Environment variable somewhere safe - this must be added to the Heroku
-configuration variables in the next section.
+## Local Deployment
+You can clone this repository and run it locally with the following steps:
+1. Login to GitHub (https://wwww.github.com)
+2. Select the repository 
+3. Click the Code button and copy the HTTPS url
+4. In your IDE, open a terminal and run the git clone command, for example:
+    ```git clone https://github.com/AlexGCbn/CI_PP5_StarDesk.git```
+5. The repository will now be cloned in your workspace
+6. Create an env.py file(This file should be included in .gitignore, so it will not be commited) in the root folder in your project, and add in the following code with the relevant key, value pairs, and ensure you enter the correct key values<br>
+<code>import os</code>
+<br><code>os.environ['SECRET_KEY'] = 'ADDED_BY_YOU'</code>
+<br><code>os.environ['DATABASE_URL'] = 'ADDED_BY_YOU'</code>
+<br><code>os.environ['STRIPE_PUBLIC_KEY'] = 'ADDED_BY_YOU'</code>
+<br><code>os.environ['STRIPE_SECRET_KEY'] = 'ADDED_BY_YOU'</code>
+<br><code>os.environ['STRIPE_WH_SECRET'] = 'ADDED_BY_YOU'</code>
+<br><code>os.environ['DEVELOPMENT'] = 'ADDED_BY_YOU'</code>
+<br><code>os.environ['EMAIL_HOST_PASS'] = 'ADDED_BY_YOU'</code>
+<br><code>os.environ['EMAIL_HOST_USER'] = 'ADDED_BY_YOU'</code>
+<br>
 
-## Deploying the app on Heroku
-1. Log into Heroku and navigate to the Dashboard.
-2. Click on the 'New' button.
-3. Choose a unique app name, and select the region closest to you.
-4. Create a database on Heroku (I elected to stay on Heroku and pay the monthly fee)
-    - Click on the Resources tab.
-    - Click the Find more add-ons button.
-    - Select Heroku Postgres, and click on Install Heroku Postgres.
-    - Select a plan (default = Mini @ $5.00 a month, which I'm using), and select your app.
-    - Return to Resources tab and click on the Heroku Postgres icon, then select the settings tab and click on Database Credentials. Copy the URI to your clipboard. Paste it to your env.py file using the key "DATABASE_URL". This will allow you to use the same database for development and production.
-5. Click the settings tab on the Dashboard, and click the button to Reveal Config Vars. Your database url should be populated here already. Add your Django secret key and your Cloudinary URL (see 1st section above) to the config variables.
-Set the PORT to 8000. I also have a GOOGLE-API-KEY config variable to enable Social-Sign-In with Google.
-6. In your local repository, add a Procfile to the root directory of the project, containing the following line :<br /> `web: gunicorn lovebooks.wsgi`.
-7. Add the url of your Heroku project to the `ALLOWED_HOSTS` list in `settings.py`.
-8. Set DEBUG to False, and commit your changes and push to GitHub.
-9. In Heroku, navigate to the Settings Tab, and within this the Buildpacks section, and click on Add Buildpack. Select the python buildpack, and save changes.
-10. On the Dashboard, select the Deploy tab, and under the Deployment Method heading, select the
-GitHub icon to connect your Heroku project to your GitHub repo. Enter your repository name in the text input, and click Search, and then when your repo appears, click Connect.
-11. Under the Manual deploy section, click Deploy Branch. You should receive this message - 'Your app was successfully deployed". Click view to see the app running in the browser.
+7. Install the relevant packages as per the requirements.txt file
+8. In the settings.py ensure the connection is set to either the Heroku postgres database or the local sqllite database
+9. Ensure debug is set to true in the settings.py file for local development
+10. Add localhost/127.0.0.1 to the ALLOWED_HOSTS variable in settings.py
+11. Run "python3 manage.py showmigrations" to check the status of the migrations
+12. Run "python3 manage.py migrate" to migrate the database
+13. Run "python3 manage.py createsuperuser" to create a super/admin user
+14. Start the application by running <code>python3 manage.py runserver</code>
+15. Open the application in a web browser with the URL: http://127.0.0.1:8000/
 
-## Making a local clone
-1. Open a terminal/command prompt on your local machine.
-2. Navigate to the folder on your local machine where you would like to clone the project.
-3. Enter the command : `git clone 'https://github.com/jordanabraga/lovebooks.git'`
-
-## Running the app in your local environment
-1. Create a virtual enviroment in the new project folder using the command `python3 -m venv venv`
-2. Activate the virtual environment : `source venv/bin/activate`
-3. Install the project requirements : `pip3 install -r requirements.txt`
-4. Create an env.py file containing the following variables (see env.example.py in the root directory of the project for a complete list of variables necessary to run the app) :
-    - DATBASE_URL : This is the url generated by Heroku - see [Deploying the app](#deploying-the-app-on-heroku)
-    - SECRET_KEY : This is the Django secret key. Choose your own and add it both here and to the Heroku config vars.
-    - CLOUDINARY_URL : This is the Cloudinary url set up above.
-    - JUST-BEATS-GOOGLE-API-KEY - You need a Google cloud account to get the API key for social sign in.
-    - SELENIUM_TEST_USERNAME, SELENIUM_TEST_PASSWORD, SELENIUM_FIXTURE_USERNAME, SELENIUM_FIXTURE_PASSWORD: 
-        If you are the project assessor, these settings can be accessed through Code Institute. They are required to run the Selenium tests using the fixtures included in the project. Standard Django automated tests do not require these variables to run.
+## Heroku
+This project can be deployed to Heroku with the following steps:
+1. Create an account on [Heroku](https://www.heroku.com/)
+2. Create an app, give it a name for example stardesk, and select a region
+3. Under resources search for postgres, and add a Postgres database to the app
+4. Note the DATABASE_URL, this needs to be set as an environment variable in Heroku and your local environment variables
+5. Create a Procfile with the text: web: gunicorn stardesk.wsgi
+6. Make sure you add your environment variables (env.py) to Heroku's Config Vars
+7. In the settings.py ensure the connection is to the Heroku postgres database
+8. Ensure debug is set to false in the settings.py file
+9. Add 'localhost/127.0.0.1', and 'stardesk.herokuapp.com' to the ALLOWED_HOSTS variable in settings.py
+10. Run "python3 manage.py showmigrations" to check the status of the migrations
+11. Run "python3 manage.py migrate" to migrate the database
+12. Run "python3 manage.py createsuperuser" to create a super/admin user
+13. Connect the app to GitHub, and enable automatic deploys from main
 
 # Credits
 
-I used Code Institute's Code Star blog project as a reference.
+I used Code Institute's Boutique Ado project as a reference.
 
-I also researched a few topics and StackOverFlow answers helped me with building this project. Here are the links that I used:
-- https://ctrlzblog.com/django-models-how-to-automatically-populate-slug-fields-for-urls/
-- https://ctrlzblog.com/how-to-use-foreign-keys-in-your-django-project/
-- https://ctrlzblog.com/how-to-add-tags-to-your-blog-a-django-manytomanyfield-example/
-- https://linuxhint.com/build-a-basic-search-for-a-django/
-- https://dev.to/thedevtimeline/how-to-add-tags-to-your-models-in-django-django-packages-series-1-3704
-- https://www.learningaboutelectronics.com/Articles/How-to-create-a-website-that-allows-for-user-generated-posts-with-Python-in-Django.php
-- https://ordinarycoders.com/blog/article/render-forms-with-django-crispy-forms
-- https://www.youtube.com/watch?v=VL5ZNCjXEbw&t=311s
+I created logos, images and used my own pictures. As well as public images of books. 
 
-
-A few book covers are fake coves created by me using licence free pictures:
-  - Image by wirestock on Freepik
-  - Image by pvproductions on Freepik
-  - avatar
-  - vecstock
-  - Photo by Rakicevic Nenad
-  - Photo by Faik Akmd
-  - Photo by Keenan Constance
-  - Photo by Lina Kivaka
-  - Photo by Pavel Danilyuk
-  - Photo by Bruno Bueno
-
+  - Image from Pexels
+https://www.pexels.com/photo/woman-in-green-button-up-shirt-holding-newspaper-4841964/
 
 # Acknowledgements
 
-This project was hard to finish because of personal reasons, but at the same time easy to move forward because of the interesting topic. The concepts I've been learning are finally settling in and I'm been able to understand more and more. Creating this was fun, and I can't wait to do more.
-
-I want thank the fellow student Valentino for helping me out with a few questions, and the psyduck tutor who saved me after I struggled with the debug turned false. 
+I want to thank Code Institute, my brother, the tutors who helped me, and the nice people from Student Care!
