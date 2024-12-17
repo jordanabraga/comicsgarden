@@ -1,0 +1,4 @@
+User-agent *
+Disallow: /accounts/
+Disallow: /bag/
+Sitemap: https://comics-garden-b0bf8a56b1c5.herokuapp.com/sitemap.xml

@@ -46,20 +46,19 @@ def all_products(request):
 
         if 'q' in request.GET:
             query = request.GET['q']
-            if not query:
+            if not query.strip():
                 messages.error(
                     request,
                     "You didn't enter any search criteria!"
                 )
-            return redirect(reverse('products'))
-
-            queries = (
-                Q(title__icontains=query) |
-                Q(description__icontains=query) |
-                Q(artist__name__icontains=query) |
-                Q(genres__name__icontains=query)
-            )
-            products = products.filter(queries).distinct()
+            else:
+                queries = (
+                    Q(title__icontains=query) |
+                    Q(description__icontains=query) |
+                    Q(artist__name__icontains=query) |
+                    Q(genres__name__icontains=query)
+                )
+                products = products.filter(queries).distinct()
 
     current_sorting = f'{sort}_{direction}'
 
