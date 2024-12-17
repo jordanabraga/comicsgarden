@@ -1,6 +1,6 @@
 # Comics Garden
 
-Comics Garden is an ecommerce platform for an indie comic shop, the type of place you not only go to buy new comics, but also to find rare gems and connect with artists. Made with Django, Python, HTML, CSS (Bootsrap) and Javascript. (And also with a picture of my cat.)
+Comics Garden is an ecommerce platform for an indie comic shop, the type of place you not only go to buy new comics, but also to find rare gems and connect with artists. Made with Stripe and AWS, using Django, Python, HTML, CSS (Bootsrap) and Javascript. (And also with a picture of my cat.)
 
 The live project can be viewed [here](https://comics-garden-b0bf8a56b1c5.herokuapp.com/)
 
