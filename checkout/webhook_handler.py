@@ -36,10 +36,7 @@ class StripeWH_Handler:
         Handle a generic/unknown/unexpected webhook event
         """
         return HttpResponse(
-            content=(
-                f'Unhandled webhook received: {event["type"]}'
-            ),
-            status=200
+            content=f'Unhandled webhook received: {event["type"]}', status=200
         )
 
     def handle_payment_intent_succeeded(self, event):
@@ -48,7 +45,7 @@ class StripeWH_Handler:
         """
         intent = event.data.object
         pid = intent.id
-        bag = intent.metadata.bag
+        cart = intent.metadata.cart
         save_info = intent.metadata.save_info
 
         billing_details = intent.charges.data[0].billing_details
@@ -63,7 +60,7 @@ class StripeWH_Handler:
         # Update profile information if save_info was checked
         profile = None
         username = intent.metadata.username
-        if username != 'AnonymousUser':
+        if username != "AnonymousUser":
             profile = UserProfile.objects.get(user__username=username)
             if save_info:
                 profile.default_phone_number = shipping_details.phone
@@ -94,7 +91,7 @@ class StripeWH_Handler:
                     street_address2__iexact=shipping_details.address.line2,
                     county__iexact=shipping_details.address.state,
                     grand_total=grand_total,
-                    original_bag=bag,
+                    original_cart=cart,
                     stripe_pid=pid,
                 )
                 order_exists = True
@@ -102,15 +99,12 @@ class StripeWH_Handler:
             except Order.DoesNotExist:
                 attempt += 1
                 time.sleep(1)
-
         if order_exists:
             self._send_confirmation_email(order)
             return HttpResponse(
-                content=(
-                    f'Webhook received: {event["type"]} | SUCCESS: '
-                    f'Verified order already in database'
-                ),
-                status=200
+                content=f'Webhook received: {event["type"]} | \
+                SUCCESS: Verified order already in database',
+                status=200,
             )
         else:
             order = None
@@ -126,10 +120,10 @@ class StripeWH_Handler:
                     street_address1=shipping_details.address.line1,
                     street_address2=shipping_details.address.line2,
                     county=shipping_details.address.state,
-                    original_bag=bag,
+                    original_cart=cart,
                     stripe_pid=pid,
                 )
-                for item_id, item_data in json.loads(bag).items():
+                for item_id, item_data in json.loads(cart).items():
                     product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
                         order_line_item = OrderLineItem(
@@ -140,7 +134,7 @@ class StripeWH_Handler:
                         order_line_item.save()
                     else:
                         for size, quantity in item_data[
-                            'items_by_size'
+                            "items_by_size"
                         ].items():
                             order_line_item = OrderLineItem(
                                 order=order,
@@ -153,12 +147,9 @@ class StripeWH_Handler:
                 if order:
                     order.delete()
                 return HttpResponse(
-                    content=(
-                        f'Webhook received: {event["type"]} | ERROR: {e}'
-                    ),
-                    status=500
+                    content=f'Webhook received: {event["type"]} | ERROR: {e}',
+                    status=500,
                 )
-
         self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} \
@@ -171,6 +162,5 @@ class StripeWH_Handler:
         Handle the payment_intent.payment_failed webhook from Stripe
         """
         return HttpResponse(
-            content=f'Webhook received: {event["type"]}',
-            status=200
+            content=f'Webhook received: {event["type"]}', status=200
         )
