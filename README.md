@@ -281,7 +281,12 @@ https://jigsaw.w3.org/css-validator/
 - When setting model fields to unique and trying to migrate, it gave an integrityError. Solution: It was due a duplicate item on the database. I used the admin panel to remove it, and tried to migrate again. It worked.
 - When including link to the wishlist on the sucess message, the link would appear as plain text. Solution: Include the safe tag on toasts messages. 
 - Search bar wasn't filtering books. Solution: I had to fix the product view.
-- Card payments started failing and giving TypeError at /checkout/ unsupported operand type(s) for *: 'decimal.Decimal' and 'float'" error. Solution: When I was fixing long lines in python, the code broke. 
+- Card payments started failing and giving TypeError at /checkout/ unsupported operand type(s) for *: 'decimal.Decimal' and 'float'" error. Solution: When I was fixing long lines in python, the code broke.
+- Order confirmation email wasn't arriving. Solution: Check webhooks on Stripe, there was an error with the payment intent. Stripe recently changed it on an update, I needed to import stripe to my webhook handler file and include this code:
+
+stripe_charge = stripe.Charge.retrieve(
+    intent.latest_charge
+)
 
 # Programs Used
 1. [Gitpod](https://www.gitpod.io/)
